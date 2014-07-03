@@ -9,6 +9,8 @@ public class dbClass {
 	public dbClass(Context applicationContext) {
 		// TODO Auto-generated constructor stub
 		
+		//Hvordan linke QR-kode/få ut info fra riktig kolonne???
+		
 	}
 
 	public void open() {
