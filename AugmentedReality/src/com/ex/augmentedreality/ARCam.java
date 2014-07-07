@@ -2,7 +2,8 @@ package com.ex.augmentedreality;
 
 
 
-import com.example.myapp.HotOrNot;
+import com.ex.augmentedreality.CompDBhelper;
+import com.ex.augmentedreality.ComponentTable;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphView.LegendAlign;
@@ -166,6 +167,13 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 		graphParams.bottomMargin = 5;
 		graphParams.rightMargin = 5;
 		frame.addView(graphView, graphParams);
+		
+		//--------------------------------------------------------
+		// Adding components to the SQLite database
+		CompDBhelper db = new CompDBhelper(this);
+		db.addComponent(new ComponentTable("1", "Hydraulic Pump 316", "No graphs available", "BIG WARNING", "RED ALERT"));
+		
+		//--------------------------------------------------------
 		
 	}  // End of the onCreate() method
 	
@@ -521,6 +529,7 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 		}
 	}
 	
+	
 	// Getting the scan result from the QR code scanning
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -536,18 +545,18 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 			tvInf.getBackground().setAlpha(160); 
 			tvInf.setTextColor(Color.rgb(14, 13, 13));
 			
-			dbClass info = new dbClass(this.getApplicationContext());
-			info.open();
-			String dbdata = info.getData();
-			info.close();
-			tvInf.setText(dbdata);
-
+			//--------------------------------------------------------
+			CompDBhelper db = new CompDBhelper(this);
+			String result = db.getComponent(QR_ID).toString();
+			tvInf.setText(result);
+			//--------------------------------------------------------
+			
 			// Checking if device has a large screen size:
 			if (scrSize == 2 || scrSize ==3){
 				tvInf.setTextSize(30);	
 			}else {
 				tvInf.setTextSize(18);	
-			}
+			}	
 	
 		}else {
 			// Didn't receive any scan data
@@ -629,7 +638,7 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 				if (width > height){
 					camera.setDisplayOrientation(0);
 					Parameters parameters = camera.getParameters();
-					parameters.setPreviewSize(width, height);
+					parameters.setPreviewSize(1280, 720);
 					//parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 					//parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 					camera.setParameters(parameters);
@@ -637,7 +646,7 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 				}else {
 					camera.setDisplayOrientation(90);
 					Parameters parameters = camera.getParameters();
-					parameters.setPreviewSize(height, width);
+					parameters.setPreviewSize(1280, 720);
 					//parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 				//	parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 					camera.setParameters(parameters);
@@ -659,26 +668,4 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 
 	
 
-
-
-	
-		
-		
-		
-		
-		
-	
-
-
-
-	
-
-
-	
-	
-	
-	
-	
-	
-	
 }
