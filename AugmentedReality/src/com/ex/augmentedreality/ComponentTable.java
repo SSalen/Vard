@@ -3,77 +3,76 @@ package com.ex.augmentedreality;
 public class ComponentTable {
 
 	private String id; 
-	private String componentInfo;
-	private String graph;
-	private String warnings;
-	private String alarms;
+	private String SFI;
+	private String manufacturer;
+	private String LastFix;
+	private String FixType;
 
 	public ComponentTable() {
 	}
 
-	public ComponentTable(String id, String componentInfo, String graph,
-			String warnings, String alarms) {
+	public ComponentTable(String id, String SFI, String manufacturer,
+			String LastFix, String FixType) {
 		super();
 		this.id = id;
-		this.componentInfo = componentInfo;
-		this.graph = graph;
-		this.warnings = warnings;
-		this.alarms = alarms;
+		this.SFI = SFI;
+		this.manufacturer = manufacturer;
+		this.LastFix = LastFix;
+		this.FixType = FixType;
 	}
 
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", componentInfo=" + componentInfo
-				+ ", graphs=" + graph + ", warnings=" + warnings + ", alarms="
-				+ alarms + "]";
+		return "Component [Id =" + id + ", Manufacturer =" + manufacturer + ", SFI =" + SFI
+				+ ",  D.O. Last Fix =" + LastFix + ", Fix Type=" + FixType + "]";
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public String getComponentinfo() {
-		return componentInfo;
+	public String getSFI() {
+		return SFI;
 	}
 
-	public String getGraph() {
+	public String getManufacturer() {
 		// TODO Auto-generated method stub
-		return graph;
+		return manufacturer;
 	}
 
-	public String getWarnings() {
+	public String getLastFix() {
 		// TODO Auto-generated method stub
-		return warnings;
+		return LastFix;
 	}
 
-	public String getAlarms() {
+	public String getFixType() {
 		// TODO Auto-generated method stub
-		return alarms;
+		return FixType;
 	}
 
 	public void setId(String string) {
 		// TODO Auto-generated method stub
-
+		id = string;
 	}
 
-	public void setComponentinfo(String string) {
+	public void setSFI(String string) {
 		// TODO Auto-generated method stub
-
+		SFI = string;
 	}
 
-	public void setGraph(String string) {
+	public void setManufacturer(String string) {
 		// TODO Auto-generated method stub
-
+		manufacturer = string;
 	}
 
-	public void setWarnings(String string) {
+	public void setLastFix(String string) {
 		// TODO Auto-generated method stub
-
+		LastFix = string;
 	}
 
-	public void setAlarms(String string) {
+	public void setFixType(String string) {
 		// TODO Auto-generated method stub
-
+		FixType = string;
 	}
 
 }

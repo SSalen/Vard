@@ -26,8 +26,8 @@ public class CompDBhelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// SQL statement to create book table
 		String CREATE_BOOK_TABLE = "CREATE TABLE components ( " + "id TEXT, "
-				+ "componentInfo TEXT, " + "graph TEXT, " + "warnings TEXT, "
-				+ "alarms TEXT )";
+				+ "SFI TEXT, " + "manufacturer TEXT, " + "LastFix TEXT, "
+				+ "FixType TEXT )";
 
 		// create components table
 		db.execSQL(CREATE_BOOK_TABLE);
@@ -49,13 +49,13 @@ public class CompDBhelper extends SQLiteOpenHelper {
 
 	// Components Table Columns names
 	private static final String KEY_ID = "id";
-	private static final String KEY_COMPONENTINFO = "componentinfo";
-	private static final String KEY_GRAPH = "graph";
-	private static final String KEY_WARNING = "warnings";
-	private static final String KEY_ALARM = "alarms";
+	private static final String KEY_SFI = "SFI";
+	private static final String KEY_MANUFACTURER = "manufacturer";
+	private static final String KEY_LASTFIX = "LastFix";
+	private static final String KEY_FIXTYPE = "FixType";
 
-	private static final String[] COLUMNS = { KEY_ID, KEY_COMPONENTINFO,
-			KEY_GRAPH, KEY_WARNING, KEY_ALARM };
+	private static final String[] COLUMNS = { KEY_ID, KEY_SFI,
+		KEY_MANUFACTURER, KEY_LASTFIX, KEY_FIXTYPE };
 
 	public void addComponent(ComponentTable component) {
 		Log.d("addComponent", component.toString());
@@ -65,10 +65,10 @@ public class CompDBhelper extends SQLiteOpenHelper {
 		// 2. create ContentValues to add key "column"/value
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID, component.getId());
-		values.put(KEY_COMPONENTINFO, component.getComponentinfo());
-		values.put(KEY_GRAPH, component.getGraph());
-		values.put(KEY_WARNING, component.getWarnings());
-		values.put(KEY_ALARM, component.getAlarms());
+		values.put(KEY_SFI, component.getSFI());
+		values.put(KEY_MANUFACTURER, component.getManufacturer());
+		values.put(KEY_LASTFIX, component.getLastFix());
+		values.put(KEY_FIXTYPE, component.getFixType());
 
 		// 3. insert
 		db.insert(TABLE_COMPONENTS, null, values);
@@ -82,7 +82,7 @@ public class CompDBhelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 
 		// 2. build query
-		Cursor cursor = db.query(TABLE_COMPONENTS, COLUMNS, " id = ?", new String[] { id }, null, null, null, null); // new String[] {String.valueOf(id) },
+		Cursor cursor = db.query(TABLE_COMPONENTS, COLUMNS, null, null, null, null, null, null);
 
 		// 3. If we got results get the first one
 		if (cursor != null)
@@ -91,11 +91,12 @@ public class CompDBhelper extends SQLiteOpenHelper {
 		// 4. build book objects
 		ComponentTable component = new ComponentTable();
 		// component.setId(Integer.parseInt(cursor.getString(0)));
+	
 		component.setId(cursor.getString(0));
-		component.setComponentinfo(cursor.getString(1));
-		component.setGraph(cursor.getString(2));
-		component.setWarnings(cursor.getString(3));
-		component.setAlarms(cursor.getString(4));
+		component.setSFI(cursor.getString(1));
+		component.setManufacturer(cursor.getString(2));
+		component.setLastFix(cursor.getString(3));
+		component.setFixType(cursor.getString(4));
 
 		Log.d("getComponent(" + id + ")", component.toString());
 

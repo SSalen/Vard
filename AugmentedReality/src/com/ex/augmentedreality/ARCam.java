@@ -171,7 +171,8 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 		//--------------------------------------------------------
 		// Adding components to the SQLite database
 		CompDBhelper db = new CompDBhelper(this);
-		db.addComponent(new ComponentTable("1", "Hydraulic Pump 316", "No graphs available", "BIG WARNING", "RED ALERT"));
+		ComponentTable myTable = new ComponentTable("1", "316", "VARD Piping", "7.7.12", "Maintenance of sealing");
+		db.addComponent(myTable);
 		
 		//--------------------------------------------------------
 		
