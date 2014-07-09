@@ -174,6 +174,10 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 		ComponentTable myTable = new ComponentTable("1", "316", "VARD Piping", "7.7.12", "Maintenance of sealing");
 		db.addComponent(myTable);
 		
+		ProcessDBhelper pDB = new ProcessDBhelper(this);
+		ProcessValueTable processTable = new ProcessValueTable("1", 89.45f, 105f, 208f, 17f, 8.54f);
+		pDB.addProcessValue(processTable);
+		
 		//--------------------------------------------------------
 		
 	}  // End of the onCreate() method
@@ -547,11 +551,14 @@ public class ARCam extends Activity implements OnClickListener , OnMenuItemClick
 			tvInf.setTextColor(Color.rgb(14, 13, 13));
 			
 			//--------------------------------------------------------
-			CompDBhelper db = new CompDBhelper(this);
-			String result = db.getComponent(QR_ID).toString();
-			tvInf.setText(result);
+		//	CompDBhelper db = new CompDBhelper(this);
+		//	String result = db.getComponent(QR_ID).toString();
+		//	tvInf.setText(result);
 			//--------------------------------------------------------
 			
+			ProcessDBhelper pDB = new ProcessDBhelper(this);
+			String results = pDB.getProcessValue(QR_ID).toString();
+			tvInf.setText(results);
 			// Checking if device has a large screen size:
 			if (scrSize == 2 || scrSize ==3){
 				tvInf.setTextSize(30);	
